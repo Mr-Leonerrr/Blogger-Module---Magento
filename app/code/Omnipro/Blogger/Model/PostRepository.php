@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Omnipro\Blogger\Model;
 
-use Exception;
 use Omnipro\Blogger\Api\PostRepositoryInterface;
 use Omnipro\Blogger\Api\Data\PostInterfaceFactory;
 use Omnipro\Blogger\Api\Data\PostSearchResultInterfaceFactory;
@@ -13,7 +12,7 @@ use Omnipro\Blogger\Model\ResourceModel\Publication\CollectionFactory as PostCol
 use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Api\ExtensibleDataObjectConverter;
 use Magento\Framework\Api\ExtensionAttribute\JoinProcessorInterface;
-use Magento\Framework\Api\Search\SearchCriteriaInterface;
+use Magento\Framework\Api\SearchCriteriaInterface;
 use Magento\Framework\Api\Search\SearchResultFactory;
 use Magento\Framework\Api\SearchCriteria\CollectionProcessorInterface;
 use Magento\Framework\Exception\CouldNotDeleteException;
@@ -97,15 +96,15 @@ class PostRepository implements PostRepositoryInterface
      */
     public function save(PostInterface $post)
     {
-        $postForm = $this->_extensibleDataObjectConverter->toNestedArray($post, [], \Omnipro\Blogger\Api\Data\PostInterface::class);
-        $postFormModel = $this->_postFactory->create()->setData($postForm);
+        $postData = $this->_extensibleDataObjectConverter->toNestedArray($post, [], \Omnipro\Blogger\Api\Data\PostInterface::class);
+        $postModel = $this->_postFactory->create()->setData($postData);
 
         try {
-            $this->_postResource->save($postFormModel);
+            $this->_postResource->save($postModel);
         } catch (\Exception $e) {
             throw new CouldNotSaveException(__("Could not save the post: %1", $e->getMessage()));
         }
-        return $postFormModel->getDataModel();
+        return $postModel->getDataModel();
     }
 
     /**
@@ -146,15 +145,15 @@ class PostRepository implements PostRepositoryInterface
     /**
      * {@inheritDoc}
      */
-    public function getList(SearchCriteriaInterface $query)
+    public function getList(SearchCriteriaInterface $searchCriteria)
     {
         $collection = $this->_postCollectionFactory->create();
-        //$this->_extensionAttributeJoinProcessor->process($collection, \Omnipro\Blogger\Model\Post::class);
+        $this->_extensionAttributeJoinProcessor->process($collection, \Omnipro\Blogger\Api\Data\PostInterface::class); //Necesita ser interfaz
 
-        $this->_collectionProcessor->process($query, $collection);
+        $this->_collectionProcessor->process($searchCriteria, $collection);
 
         $searchResults = $this->_searchResultsFactory->create();
-        $searchResults->setSearchCriteria($query);
+        $searchResults->setSearchCriteria($searchCriteria);
 
         $items = [];
         foreach ($collection as $model) {
@@ -163,7 +162,6 @@ class PostRepository implements PostRepositoryInterface
 
         $searchResults->setItems($items);
         $searchResults->setTotalCount($collection->getSize());
-        throw new Exception("Stopped");
         return $searchResults;
     }
 }

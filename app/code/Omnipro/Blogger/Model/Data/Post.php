@@ -2,16 +2,16 @@
 
 namespace Omnipro\Blogger\Model;
 
-use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\DataObject\IdentityInterface;
+use Magento\Framework\Api\AbstractExtensibleObject;
 use Magento\Framework\Setup\Declaration\Schema\Db\MySQL\Definition\Columns\Timestamp;
+use Omnipro\Blogger\Api\Data\PostExtensionInterface;
 use Omnipro\Blogger\Api\Data\PostInterface;
 
 /**
  * Post view
  * @package Omnipro\Blogger\Model
  */
-class Post extends AbstractModel implements PostInterface, IdentityInterface
+class Post extends AbstractExtensibleObject implements PostInterface
 {
 
     const CACHE_TAG = "omnipro_blogger_post";
@@ -30,11 +30,11 @@ class Post extends AbstractModel implements PostInterface, IdentityInterface
     }
 
     /**
-     * @return string[]
+     * @return PostExtensionInterface|null
      */
-    public function getIdentities()
+    public function getExtensionAttributes()
     {
-        return [self::CACHE_TAG . "_" . $this->getId()];
+        return $this->_getExtensionAttributes();
     }
 
     /**
@@ -77,14 +77,28 @@ class Post extends AbstractModel implements PostInterface, IdentityInterface
         return $this->getData(self::POST_AUTHOR);
     }
 
+    /**
+     * Set Post ID
+     * @param int $post_id 
+     * @return PostInterface
+     */
     public function setId($post_id)
     {
         $this->setData(self::POST_ID, $post_id);
     }
 
     /**
-     * @param string $title 
+     * @param PostExtensionInterface $extensionAttributes 
      * @return $this
+     */
+    public function setExtensionAttributes(PostExtensionInterface $extensionAttributes)
+    {
+        return $this->_setExtensionAttributes($extensionAttributes);
+    }
+
+    /**
+     * @param string $title 
+     * @return PostInterface
      */
     public function setTitle($title)
     {
@@ -93,7 +107,7 @@ class Post extends AbstractModel implements PostInterface, IdentityInterface
 
     /**
      * @param string $content 
-     * @return $this
+     * @return PostInterface
      */
     public function setContent($content)
     {
@@ -102,7 +116,7 @@ class Post extends AbstractModel implements PostInterface, IdentityInterface
 
     /**
      * @param string $image_url 
-     * @return $this
+     * @return PostInterface
      */
     public function setImage($image_url)
     {
@@ -111,7 +125,7 @@ class Post extends AbstractModel implements PostInterface, IdentityInterface
 
     /**
      * @param string $author_email 
-     * @return $this
+     * @return PostInterface
      */
     public function setAuthor($author_email)
     {
@@ -120,7 +134,7 @@ class Post extends AbstractModel implements PostInterface, IdentityInterface
 
     /**
      * @param Timestamp $date 
-     * @return $this
+     * @return PostInterface
      */
     public function setPublicationDate($date)
     {

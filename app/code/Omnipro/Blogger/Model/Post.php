@@ -18,7 +18,7 @@ use Omnipro\Blogger\Model\ResourceModel\Post as PostModel;
  * Post view
  * @package Omnipro\Blogger\Model
  */
-class Post extends AbstractModel implements PostInterface
+class Post extends AbstractModel
 {
 
     protected $_eventPrefix = "omnipro_blogger";
@@ -34,7 +34,7 @@ class Post extends AbstractModel implements PostInterface
      * @param Registry $registry 
      * @param PostInterfaceFactory $postInterfaceFactory 
      * @param DataObjectHelper $dataObjectHelper 
-     * @param Post $postResource 
+     * @param PostModel $postResource 
      * @param Collection $postCollection 
      * @param array $data 
      */
@@ -53,134 +53,16 @@ class Post extends AbstractModel implements PostInterface
     }
 
     /**
-     * @return void
+     * Retrieve post model with post data
+     * @return PostInterface
      */
-    public function _construct()
-    {
-        $this->_init(\Omnipro\Blogger\Model\ResourceModel\Post::class);
-    }
-
     public function getDataModel()
     {
         $postData = $this->getData();
 
         $postDataObject = $this->_postFactory->create();
-        $this->_dataObjectHelper->populateWithArray($postDataObject, $postData, "\\Omnipro\\Blogger\\Api\\Data\\PostInterface");
+        $this->_dataObjectHelper->populateWithArray($postDataObject, $postData, PostInterface::class);
 
         return $postDataObject;
-    }
-
-    /**
-     * Get Title
-     *
-     * @return string|null
-     */
-    public function getTitle()
-    {
-        return $this->getData(self::POST_TITLE);
-    }
-
-    /**
-     * Get Content
-     *
-     * @return string|null
-     */
-    public function getContent()
-    {
-        return $this->getData(self::POST_CONTENT);
-    }
-
-    /**
-     * Get Created At
-     *
-     * @return Timestamp|null
-     */
-    public function getPublicationDate()
-    {
-        return $this->getData(self::PUBLICATION_DATE);
-    }
-
-    /**
-     * Get ID
-     *
-     * @return int|null
-     */
-    public function getId()
-    {
-        return $this->getData(self::POST_ID);
-    }
-
-    /**
-     * @return string
-     */
-    public function getAuthor()
-    {
-        return $this->getData(self::POST_AUTHOR);
-    }
-
-    /**
-     * @return string
-     */
-    public function getImage()
-    {
-        return $this->getData(self::POST_IMAGE);
-    }
-
-    /**
-     * @param string $title
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        return $this->setData(self::POST_TITLE, $title);
-    }
-
-    /**
-     * @param string $content
-     * @return $this
-     */
-    public function setContent($content)
-    {
-        return $this->setData(self::POST_CONTENT, $content);
-    }
-
-    /**
-     * @param string $image_url 
-     * @return $this
-     */
-    public function setImage($image_url)
-    {
-        return $this->setData(self::POST_IMAGE, $image_url);
-    }
-
-    /**
-     * @param string $author_email 
-     * @return $this
-     */
-    public function setAuthor($author_email)
-    {
-        return $this->setData(self::POST_AUTHOR, $author_email);
-    }
-
-    /**
-     * Set Created At
-     *
-     * @param Timestamp $createdAt
-     * @return $this
-     */
-    public function setPublicationDate($createdAt)
-    {
-        return $this->setData(self::PUBLICATION_DATE, $createdAt);
-    }
-
-    /**
-     * Set ID
-     *
-     * @param int $id
-     * @return $this
-     */
-    public function setId($id)
-    {
-        return $this->setData(self::POST_ID, $id);
     }
 }

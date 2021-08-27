@@ -15,7 +15,7 @@ interface PostInterface extends ExtensibleDataInterface
 
   /**
    * @param int $post_id
-   * @return void
+   * @return $this
    */
   public function setId($post_id);
 
@@ -24,9 +24,21 @@ interface PostInterface extends ExtensibleDataInterface
      */
    public function getId();
 
+  /**
+   * setExtensionAttributes
+   * @param \Omnipro\Blogger\Api\Data\PostExtensionInterface $extensionAttributes 
+   * @return $this
+   */
+  public function setExtensionAttributes(\Omnipro\Blogger\Api\Data\PostExtensionInterface $extensionAttributes);
+
+  /**
+   * @return \Omnipro\Blogger\Api\Data\PostExtensionInterface|null
+   */
+  public function getExtensionAttributes();
+
    /**
     * @param string $title
-    * @return void
+    * @return $this
     */
    public function setTitle($title);
 
@@ -37,7 +49,7 @@ interface PostInterface extends ExtensibleDataInterface
 
    /**
     * @param string $content
-    * @return void
+    * @return $this
     */
    public function setContent($content);
 
@@ -48,7 +60,7 @@ interface PostInterface extends ExtensibleDataInterface
 
    /**
     * @param string $image_url
-    * @return void
+    * @return $this
     */
    public function setImage($image_url);
 
@@ -59,7 +71,7 @@ interface PostInterface extends ExtensibleDataInterface
 
    /**
     * @param string $author_email 
-    * @return void
+    * @return $this
     */
    public function setAuthor($author_email);
 
@@ -70,12 +82,12 @@ interface PostInterface extends ExtensibleDataInterface
 
    /**
     * @param Timestamp $date 
-    * @return void
+    * @return $this
     */
    public function setPublicationDate($date);
 
    /**
-    * @return int
+    * @return Timestamp
     */
    public function getPublicationDate();
 }
