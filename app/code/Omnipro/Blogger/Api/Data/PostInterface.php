@@ -1,4 +1,5 @@
 <?php
+
 namespace Omnipro\Blogger\Api\Data;
 
 use Magento\Framework\Api\ExtensibleDataInterface;
@@ -19,15 +20,70 @@ interface PostInterface extends ExtensibleDataInterface
    */
   public function setId($post_id);
 
-    /**
-     * @return int
-     */
-   public function getId();
+  /**
+   * @return int|null
+   */
+  public function getId();
+
+  /**
+   * @param string $title
+   * @return $this
+   */
+  public function setTitle($title);
+
+  /**
+   * @return string|null
+   */
+  public function getTitle();
+
+  /**
+   * @param string $content
+   * @return $this
+   */
+  public function setContent($content);
+
+  /**
+   * @return string|null
+   */
+  public function getContent();
+
+  /**
+   * @param string $image_url
+   * @return $this
+   */
+  public function setImage($image_url);
+
+  /**
+   * @return string
+   */
+  public function getImage();
+
+  /**
+   * @param string $author_email 
+   * @return $this
+   */
+  public function setAuthor($author_email);
+
+  /**
+   * @return string
+   */
+  public function getAuthor();
+
+  /**
+   * @param Timestamp $date 
+   * @return $this
+   */
+  public function setPublicationDate($date);
+
+  /**
+   * @return Timestamp|null
+   */
+  public function getPublicationDate();
 
   /**
    * setExtensionAttributes
    * @param \Omnipro\Blogger\Api\Data\PostExtensionInterface $extensionAttributes 
-   * @return $this
+   * @return void
    */
   public function setExtensionAttributes(\Omnipro\Blogger\Api\Data\PostExtensionInterface $extensionAttributes);
 
@@ -35,59 +91,4 @@ interface PostInterface extends ExtensibleDataInterface
    * @return \Omnipro\Blogger\Api\Data\PostExtensionInterface|null
    */
   public function getExtensionAttributes();
-
-   /**
-    * @param string $title
-    * @return $this
-    */
-   public function setTitle($title);
-
-   /**
-    * @return string
-    */
-   public function getTitle();
-
-   /**
-    * @param string $content
-    * @return $this
-    */
-   public function setContent($content);
-
-   /**
-    * @return string
-    */
-   public function getContent();
-
-   /**
-    * @param string $image_url
-    * @return $this
-    */
-   public function setImage($image_url);
-
-   /**
-    * @return string
-    */
-   public function getImage();
-
-   /**
-    * @param string $author_email 
-    * @return $this
-    */
-   public function setAuthor($author_email);
-
-   /**
-    * @return string
-    */
-   public function getAuthor();
-
-   /**
-    * @param Timestamp $date 
-    * @return $this
-    */
-   public function setPublicationDate($date);
-
-   /**
-    * @return Timestamp
-    */
-   public function getPublicationDate();
 }
