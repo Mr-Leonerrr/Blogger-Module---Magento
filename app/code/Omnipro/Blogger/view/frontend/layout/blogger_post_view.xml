@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="1column" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <title>Incredible Post</title>
+        <css src="Omnipro_Blogger::css/estilos_blogger.css" rel="stylesheet" type="text/css"/>
+        <link rel="stylesheet" src="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" src_type="url"/>
+        <link rel="stylesheet" type="text/css" src="hhttps://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" src_type="url" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" src_type="url"></script>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Omnipro\Blogger\Block\View" name="post.view" template="Omnipro_Blogger::post/view.phtml" />
+        </referenceContainer>
+        <referenceContainer name="header.container" remove="true"/>
+        <referenceBlock name="catalog.topnav" remove="true"/>
+        <referenceContainer name="footer-container" remove="true"/>
+    </body>
+</page>

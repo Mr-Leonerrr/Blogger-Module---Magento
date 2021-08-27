@@ -1,0 +1,13 @@
+<?php
+
+/** @var Toptal\Blog\Block\View $block */ ?>
+<h1><?php echo $block->getPost()->getTitle(); ?></h1>
+<p><?php echo $block->getPost()->getContent(); ?></p>
+<div>
+    <button onclick="history.back(-1)">
+        <i class="fas fa-arrow-circle-left"></i>
+    </button>
+    <button onclick=location.reload()>
+        <i class="fas fa-sync-alt"></i>
+    </button>
+</div>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="omnipro_blogger" resource="default" engine="innodb" comment="Blog Post">
+        <column xsi:type="int" name="post_id" padding="5" unsigned="true" nullable="false" identity="true" comment="PUBLICATION" />
+        <column xsi:type="varchar" name="post_title" nullable="false" comment="POST_TITLE" />
+        <column xsi:type="varchar" name="post_content" nullable="false" comment="POST_CONTENT" />
+        <column xsi:type="varchar" name="image_url" nullable="true" default="https://www.alldaydr.com/app/images/no_image.png" comment="POST_IMAGE" />
+        <column xsi:type="varchar" name="author_email" nullable="false" comment="POST_AUTHOR" />
+        <column xsi:type="timestamp" name="publication_date" onCreate="true" nullable="false" default="CURRENT_TIMESTAMP" comment="" />
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="post_id" />
+        </constraint>
+    </table>
+</schema>

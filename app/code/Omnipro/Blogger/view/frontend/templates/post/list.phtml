@@ -1,0 +1,71 @@
+<?php
+
+/** @var Omnipro\Blogger\Block\Posts $block */
+$posts = $block->getPosts();
+?>
+
+<div class="post-form">
+    <form action="<?= $block->getBaseUrl() . "blogger/index/save"; ?>" method="post" id="publish-post-form" data-hasrequired="<?= $block->escapeHtmlAttr(__('* Required Fields')) ?>">
+        <div class="card form-card">
+            <div class="card-body">
+                <div class="form-row align-items-center input-group">
+                    <input type="text" class="form-control col-8" id="post_title" placeholder="Great title">
+                    <div class="input-group-append button-publish">
+                        <button type="submit" class="btn btn-primary ml-2 h-1">Publish!</button>
+                    </div>
+                </div>
+
+                <div class="form-row align-items-center">
+                    <div class="col col-md-12">
+                        <label class="sr-only" for="inlineFormInput"></label>
+                        <textarea class="span6" rows="3" placeholder="Epic history" title="<?= $block->escapeHtmlAttr(__("Content")) ?>" class="form-control " id="post" required>
+                        </textarea>
+                        <!--<input type="multitext" class="form-control " id="post" placeholder="Here all my important post text">-->
+                    </div>
+                </div>
+
+                <div class="form-row align-items-center">
+                    <label for="colFormLabelSm" class="col-md-6 col-form-label col-form-label-sm">Email</label>
+                    <div class="col-md-6">
+                        <input type="email" class="form-control " id="email" placeholder="Email Address">
+                    </div>
+
+                    <label class="form-label" for="image_url">Your cool image</label>
+                    <input type="file" name="image_url" class="form-control" id="image_url" accept="image/*" accept=".jpg, .jpeg, .png" title="<?= $block->escapeHtmlAttr(__("Image")) ?>" />
+                </div>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+<h2 style="text-align: center; margin: 0 auto 2em auto;">Omniposts</h2>
+<div class="form-row align-items-center">
+    <?php foreach ($posts as $post) : ?>
+        <div class="card mb-3 ml-3 align-items-center" style="max-width: 40%;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="<?= $post->getImage() ?>" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="<?= $block->getPostUrl($post); ?>"><?= $post->getTitle(); ?></a></h5>
+                        <p class="card-text"><?= $post->getContent(); ?></p>
+                        <script>console.log(<?php $post->getPublicationDate();?>);</script>
+                        <p class="card-text"><small class="text-muted"><?= date("d/M/Y", $post->getPublicationDate()); ?></small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <?php endforeach; ?>
+</div>
+
+
+<div class="align-items-center">
+    <div class="position-absolute bottom-0 end-0">
+        <button onclick="location.href='/'">
+            <i class="fas fa-home"></i>
+        </button>
+    </div>
+</div>
