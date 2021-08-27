@@ -4,17 +4,10 @@ declare(strict_types=1);
 
 namespace Omnipro\Blogger\Model;
 
-use Magento\Framework\Model\AbstractModel;
-use Magento\Framework\Model\Context;
-use Magento\Framework\Registry;
-use Magento\Framework\Api\DataObjectHelper;
 use Magento\Framework\Model\AbstractExtensibleModel;
 use Magento\Framework\Setup\Declaration\Schema\Db\MySQL\Definition\Columns\Timestamp;
 use Omnipro\Blogger\Api\Data\PostExtensionInterface;
 use Omnipro\Blogger\Api\Data\PostInterface;
-use Omnipro\Blogger\Api\Data\PostInterfaceFactory;
-use Omnipro\Blogger\Model\ResourceModel\Publication\Collection;
-use Omnipro\Blogger\Model\ResourceModel\Post as PostModel;
 
 /**
  * Post view

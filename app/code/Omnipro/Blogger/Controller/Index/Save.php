@@ -2,10 +2,8 @@
 
 namespace Omnipro\Blogger\Controller\Index;
 
-use Laminas\Json\Expr;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\Action;
-use Magento\Framework\Controller\ResultFactory;
 use Magento\Framework\Exception\LocalizedException;
 use Magento\Framework\Image\AdapterFactory;
 use Magento\Framework\View\FileSystem;
